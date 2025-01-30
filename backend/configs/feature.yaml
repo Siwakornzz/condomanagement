@@ -1,0 +1,10 @@
+features:
+  # user management
+  enable_user: true
+  enable_role: true
+  enable_auth: true
+
+
+
+  enable_report: false
+  enable_chat: false

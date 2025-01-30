@@ -1,0 +1,21 @@
+version: '3'
+services:
+  app:
+    build: .
+    env_file: .env   # โหลด Environment Variables จากไฟล์ .env
+    volumes:
+      - ./configs:/app/configs  # Mount ไฟล์ Config (YAML)
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+
+  redis:
+    image: redis:alpine
+

@@ -1,0 +1,12 @@
+app:
+  name: condomanagement
+  version: 1.0.0
+  description: Condo Management System
+
+logging:
+  level: debug
+  format: json
+
+api:
+  rate_limit: 100
+  timeout: 30s
