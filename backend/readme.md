@@ -29,7 +29,7 @@ The core logic contains the business rules and domain logic, independent of exte
 
 Below is a high-level diagram of how the **Hexagonal Architecture** is implemented in this project:
 
-![Hexagonal Architecture](https://github.com/Siwakornzz/condomanagement/blob/main/assets/images/hexagonal-architecture.png)
+![Hexagonal Architecture](https://github.com/Siwakornzz/condomanagement/tree/blob/main/assets/images/hexagonal-architecture.png)
 
 ## 📂 Project Structure
 
