@@ -2,6 +2,30 @@
 
 This is the backend service for **CondoManagement**, written in **Go**.
 
+## Architecture
+
+This project follows **Hexagonal Architecture** (also known as **Ports and Adapters**). The core idea is to separate the business logic from external dependencies, making it easier to test, maintain, and extend.
+
+### Core Logic
+At the heart of the system, we have the core business logic, which includes:
+- **Entities**: The core business objects (e.g., `User`, `Role`)
+- **Use Cases**: The business operations (e.g., `CreateUser`, `GetUser`)
+
+### Ports
+**Ports** define the interfaces through which the core logic communicates with the outside world. For example:
+- **UserRepositoryPort**: Interface for storing and retrieving users from a database
+- **CreateUserPort**: Interface for creating users within the system
+
+### Adapters
+**Adapters** implement the Ports and connect the core logic to external systems. For example:
+- **HTTP Adapter**: Handles incoming HTTP requests and converts them into use case invocations
+- **Database Adapter (GORM)**: Implements the `UserRepositoryPort` interface and interacts with the database
+- **Cache Adapter (Redis)**: Implements caching logic for frequently accessed data
+
+By following the Hexagonal Architecture, we ensure that the core business logic remains decoupled from the infrastructure and external services.
+
+
+
 ## 📂 Project Structure
 
 ```

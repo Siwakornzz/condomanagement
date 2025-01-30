@@ -75,7 +75,7 @@ This project is a [condo management service]. It is structured into different fo
    ./cmd/main
    ```
 
-```
+``````````````
                                               ,           ^'^  _
                                               )               (_) ^'^
          _/\_                    .---------. ((        ^'^
@@ -94,4 +94,4 @@ This project is a [condo management service]. It is structured into different fo
    ,' ',  ,' ',    |           |  ||  |  ||  ||_| |_||   ^^^
 .,,|xxx|,.|xxx|,.,,'==========='==''=='==''=='=======',,....,,,,.,
 
-```
+``````````````
