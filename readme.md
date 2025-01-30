@@ -53,7 +53,7 @@ This project is a [condo management service]. It is structured into different fo
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/your-repo.git
+   git clone https://github.com/Siwakornzz/condomanagement
    cd backend
    ```
 
