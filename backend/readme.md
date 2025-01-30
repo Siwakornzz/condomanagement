@@ -26,9 +26,6 @@ The core logic contains the business rules and domain logic, independent of exte
 - **Cache Adapter (Redis)**: Implements caching mechanisms using Redis
 
 ### Architecture Diagram
-
-Below is a high-level diagram of how the **Hexagonal Architecture** is implemented in this project:
-
 ![Hexagonal Architecture](https://github.com/Siwakornzz/condomanagement/blob/main/assets/images/hexagonal-architecture.png)
 
 ## 📂 Project Structure
