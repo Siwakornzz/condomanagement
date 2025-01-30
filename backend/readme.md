@@ -2,29 +2,34 @@
 
 This is the backend service for **CondoManagement**, written in **Go**.
 
-## Architecture
+### Hexagonal Architecture (Ports and Adapters)
 
 This project follows **Hexagonal Architecture** (also known as **Ports and Adapters**). The core idea is to separate the business logic from external dependencies, making it easier to test, maintain, and extend.
 
-### Core Logic
-At the heart of the system, we have the core business logic, which includes:
-- **Entities**: The core business objects (e.g., `User`, `Role`)
-- **Use Cases**: The business operations (e.g., `CreateUser`, `GetUser`)
+#### Core
 
-### Ports
-**Ports** define the interfaces through which the core logic communicates with the outside world. For example:
-- **UserRepositoryPort**: Interface for storing and retrieving users from a database
-- **CreateUserPort**: Interface for creating users within the system
+The core logic contains the business rules and domain logic, independent of external systems. This is located in the `internal` folder.
 
-### Adapters
-**Adapters** implement the Ports and connect the core logic to external systems. For example:
-- **HTTP Adapter**: Handles incoming HTTP requests and converts them into use case invocations
-- **Database Adapter (GORM)**: Implements the `UserRepositoryPort` interface and interacts with the database
-- **Cache Adapter (Redis)**: Implements caching logic for frequently accessed data
+#### Ports
 
-By following the Hexagonal Architecture, we ensure that the core business logic remains decoupled from the infrastructure and external services.
+**Ports** define the interfaces for communication between the core and external systems. For example:
 
+- `UserRepositoryPort`: Interface to manage user data
+- `CreateUserPort`: Interface for creating users
 
+#### Adapters
+
+**Adapters** are responsible for implementing the Ports and enabling communication with external systems, such as:
+
+- **HTTP Adapter**: Handles incoming requests and maps them to the appropriate use case
+- **Database Adapter (GORM)**: Implements `UserRepositoryPort` and interacts with the database
+- **Cache Adapter (Redis)**: Implements caching mechanisms using Redis
+
+### Architecture Diagram
+
+Below is a high-level diagram of how the **Hexagonal Architecture** is implemented in this project:
+
+![Hexagonal Architecture](https://github.com/Siwakornzz/condomanagement/blob/main/assets/images/hexagonal-architecture.png)
 
 ## 📂 Project Structure
 
@@ -119,7 +124,7 @@ go build -o cmd/main cmd/main.go
       \  ___  /        \  ___  /         \  ___  /         \  ___  /
     .__( `-' )          ( `-' )           ( `-' )        .__( `-' )  ___
    / !  `---' \      _--'`---_          .--`---'\       /   /`---'`-'   \
-  /  \         !    /         \___     /        _>\    /   /          ._/ 
+  /  \         !    /         \___     /        _>\    /   /          ._/
  !   /\        !   /   /       !  \   /  /-___-'   ) /'   /.-----\___/     / -)
  !   !_\______/\. (   <        !__/ /'  (        _/  \___//          `----'   |
   \    \       ! \ \   \      /\    \___/`------' )       \            ______/
