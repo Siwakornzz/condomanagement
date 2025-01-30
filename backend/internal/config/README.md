@@ -1,4 +1,3 @@
-
 # Config Package
 
 The `config` package is responsible for loading and managing application configuration. It loads configuration values from environment variables and a YAML configuration file, and combines them into a structured configuration object that can be used throughout the application.
@@ -82,7 +81,7 @@ This function loads the following:
 - Reads the `.env` file (if present) to load environment variables.
 - Reads the `app.yaml` file for non-sensitive configuration data.
 - Combines values from the environment variables and YAML file into a single structured `Config` object.
-  
+
 ### 2. Config File (app.yaml)
 
 The configuration is expected to be stored in a `app.yaml` file in the `../configs` directory. The file should follow this format:
@@ -126,6 +125,7 @@ JWT_SECRET=mysecretkey
 The `viper` package automatically merges the values from the environment variables with the values from the `app.yaml` file. Values from the environment variables will override any matching keys from the YAML file.
 
 For example:
+
 - If `DB_HOST` is provided in the `.env` file, it will override the corresponding value in `app.yaml`.
 
 ## Example Usage
@@ -148,8 +148,54 @@ fmt.Println("JWT Secret:", config.JwtSecret)
 
 - The `.env` file is useful for overriding sensitive settings, such as database credentials and JWT secrets, and should be stored securely.
 - The YAML file (`app.yaml`) is typically used for general configuration like application settings, logging, and API configuration.
-  
+
 ## Dependencies
 
 - `github.com/joho/godotenv`: For loading environment variables from a `.env` file.
 - `github.com/spf13/viper`: For loading and managing configuration from multiple sources (YAML, environment variables).
+
+````
+               ___
+             _//_\\
+           ,"    //".
+          /          \
+        _/           |
+       (.-,--.       |
+       /o/  o \     /
+       \_\    /  /\/\
+       (__`--'   ._)
+       /  `-.     |
+      (     ,`-.  |
+       `-,--\_  ) |-.
+        _`.__.'  ,-' \
+       |\ )  _.-'    |
+       i-\.'\     ,--+.
+     .' .'   \,-'/     \
+    / /         /       \
+    7_|         |       |
+    |/          "i.___.j"
+    /            |     |\
+   /             |     | \
+  /              |     |  |
+  |              |     |  |
+  |____          |     |-i'
+   |   """"----""|     | |
+   \           ,-'     |/
+    `.         `-,     |
+     |`-._      / /| |\ \
+     |    `-.   `' | ||`-'
+     |      |      `-'|
+     |      |         |
+     |      |         |
+     |      |         |
+     |      |         |
+     |      |         |
+     |      |         |
+     )`-.___|         |
+   .'`-.____)`-.___.-'(
+ .'        .'-._____.-i
+/        .'           |h
+`-------/         .   |j
+        `--------' "--'w
+        ```
+````
