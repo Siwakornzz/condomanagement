@@ -1,3 +1,4 @@
+
 # Config Package
 
 The `config` package is responsible for loading and managing application configuration. It loads configuration values from environment variables and a YAML configuration file, and combines them into a structured configuration object that can be used throughout the application.
@@ -41,15 +42,17 @@ type Config struct {
 
 ### Sub-Structs
 
-- `AppConfig`: Contains settings related to the application such as name, version, and description.
+- `AppConfig`: Contains settings related to the application such as name, version, description, host, and port.
 - `LoggingConfig`: Contains logging settings like log level and format.
 - `ApiConfig`: Contains API-related settings like rate limit and timeout.
 
 ```go
 type AppConfig struct {
-    Name        string `mapstructure:"name"`
-    Version     string `mapstructure:"version"`
-    Description string `mapstructure:"description"`
+    Name        string  `mapstructure:"name"`
+    Version     float64 `mapstructure:"version"`
+    Description string  `mapstructure:"description"`
+    Host        string  `mapstructure:"host"`
+    Port        int     `mapstructure:"port"`
 }
 
 type LoggingConfig struct {
@@ -60,6 +63,14 @@ type LoggingConfig struct {
 type ApiConfig struct {
     RateLimit string `mapstructure:"rate_limit"`
     Timeout   string `mapstructure:"timeout"`
+}
+```
+
+- The `AppConfig` struct also includes a method `GetAddress()` that returns the full address by combining `Host` and `Port`.
+
+```go
+func (a AppConfig) GetAddress() string {
+    return fmt.Sprintf("%s:%d", a.Host, a.Port)
 }
 ```
 
@@ -91,6 +102,8 @@ app:
   name: condomanagement
   version: 1.0.0
   description: Condo Management System
+  host: localhost
+  port: 8080
 
 logging:
   level: debug
@@ -137,6 +150,7 @@ fmt.Println("App Name:", config.App.Name)
 fmt.Println("Database Host:", config.DBHost)
 fmt.Println("API Rate Limit:", config.Api.RateLimit)
 fmt.Println("JWT Secret:", config.JwtSecret)
+fmt.Println("App Address:", config.App.GetAddress())
 ```
 
 ## Error Handling
@@ -154,7 +168,8 @@ fmt.Println("JWT Secret:", config.JwtSecret)
 - `github.com/joho/godotenv`: For loading environment variables from a `.env` file.
 - `github.com/spf13/viper`: For loading and managing configuration from multiple sources (YAML, environment variables).
 
-````
+
+```
                ___
              _//_\\
            ,"    //".
@@ -197,5 +212,5 @@ fmt.Println("JWT Secret:", config.JwtSecret)
 /        .'           |h
 `-------/         .   |j
         `--------' "--'w
-        ```
-````
+
+```
