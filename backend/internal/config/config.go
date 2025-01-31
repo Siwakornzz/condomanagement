@@ -2,15 +2,44 @@ package config
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/joho/godotenv"
 	"github.com/spf13/viper"
 )
 
 type AppConfig struct {
-	Name        string `mapstructure:"name"`
-	Version     string `mapstructure:"version"`
-	Description string `mapstructure:"description"`
+	Name          string `mapstructure:"name"`
+	Version       string `mapstructure:"version"`
+	Description   string `mapstructure:"description"`
+	Host          string `mapstructure:"host"`
+	Port          int    `mapstructure:"port"`
+	Timeout       int    `mapstructure:"timeout"`
+	TimeoutFormat string `mapstructure:"timeout_format"`
+}
+
+func (a AppConfig) GetAddress() string {
+	return fmt.Sprintf("%s:%d", a.Host, a.Port)
+}
+
+func (a AppConfig) GetTimeout() time.Duration {
+	return time.Duration(a.Timeout) * a.GetTimeoutFormat()
+
+}
+
+func (a AppConfig) GetTimeoutFormat() time.Duration {
+	switch a.TimeoutFormat {
+	case "s", "sec", "second":
+		return time.Second
+	case "m", "min", "minute":
+		return time.Minute
+	case "h", "hour":
+		return time.Hour
+	case "d", "day":
+		return time.Hour * 24
+	default:
+		return time.Second
+	}
 }
 
 type LoggingConfig struct {
@@ -19,8 +48,29 @@ type LoggingConfig struct {
 }
 
 type ApiConfig struct {
-	RateLimit string `mapstructure:"rate_limit"`
-	Timeout   string `mapstructure:"timeout"`
+	RateLimit     string `mapstructure:"rate_limit"`
+	Timeout       int    `mapstructure:"timeout"`
+	TimeoutFormat string `mapstructure:"timeout_format"`
+}
+
+func (a ApiConfig) GetTimeout() time.Duration {
+	return time.Duration(a.Timeout) * a.GetTimeoutFormat()
+
+}
+
+func (a ApiConfig) GetTimeoutFormat() time.Duration {
+	switch a.TimeoutFormat {
+	case "s", "sec", "second":
+		return time.Second
+	case "m", "min", "minute":
+		return time.Minute
+	case "h", "hour":
+		return time.Hour
+	case "d", "day":
+		return time.Hour * 24
+	default:
+		return time.Second
+	}
 }
 
 type Config struct {

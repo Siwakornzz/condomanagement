@@ -2,6 +2,11 @@ app:
   name: condomanagement
   version: 1.0.0
   description: Condo Management System
+  Host: localhost
+  Port: 5001
+  Timeout: 60
+  timeout_format: second
+
 
 logging:
   level: debug
@@ -9,4 +14,5 @@ logging:
 
 api:
   rate_limit: 100
-  timeout: 30s
+  timeout: 30
+  timeout_format: second
